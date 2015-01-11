@@ -44,10 +44,10 @@ html5rocks.indexedDB.open = function() {
 };
 // Insert
 html5rocks.indexedDB.addTodo = function(todoText) {
-    console.log(todoText);
     if(typeof todoText === 'undefined'){
         return false;
     }
+    console.log(todoText);
     var db = html5rocks.indexedDB.db;
     var trans = db.transaction(["todo"], "readwrite");
     var store = trans.objectStore("todo");
@@ -58,7 +58,7 @@ html5rocks.indexedDB.addTodo = function(todoText) {
 
     trans.oncomplete = function(e) {
         // Re-render all the todo's
-        // html5rocks.indexedDB.getAllTodoItems();
+        html5rocks.indexedDB.getAllTodoItems();
     };
 
     request.onerror = function(e) {
@@ -106,18 +106,28 @@ html5rocks.indexedDB.deleteTodo = function(id) {
     };
 };
 // Delete all
-html5rocks.indexedDB.deleteTodo = function() {
+html5rocks.indexedDB.deleteAllTodo = function() {
     var db = html5rocks.indexedDB.db;
     var trans = db.transaction(["todo"], "readwrite");
     var store = trans.objectStore("todo");
-
-    var request = store.delete(id);
-
+    
+    var keyRange = IDBKeyRange.lowerBound(0);
+    var cursorRequest = store.openCursor(keyRange);
+    
+    cursorRequest.onsuccess = function(e) {
+        var result = e.target.result;
+        if(result == false || result==null)
+            return;
+      
+        var request = store.delete(result.value.timeStamp);
+        result.continue();
+    };
     trans.oncomplete = function(e) {
         html5rocks.indexedDB.getAllTodoItems();  // Refresh the screen
     };
-
-    request.onerror = function(e) {
+    cursorRequest.onerror = function(e) {
         console.log(e);
     };
-};
+    
+}
+/* --------------------------------------------------------------- */

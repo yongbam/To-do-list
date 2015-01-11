@@ -22,11 +22,14 @@ function renderTodo(row) {
 }
 // Initialize
 function init() {
-  html5rocks.indexedDB.open(); // open displays the data previously saved
+    html5rocks.indexedDB.open(); // open displays the data previously saved
 }
 // Add
 function addTodo(val) {
-  html5rocks.indexedDB.addTodo(val);
+    html5rocks.indexedDB.addTodo(val);
+}
+function deleteAllTodo(){
+    html5rocks.indexedDB.deleteAllTodo();
 }
 // Input form
 var app = angular.module("myToDoListApp", []);
@@ -37,5 +40,8 @@ app.controller("myToDoCtrl", function($scope) {
     $scope.save  = function() {
         console.log($scope.message);
         addTodo($scope.message);
+    };
+    $scope.clearAll = function(){
+        deleteAllTodo();
     };
 });

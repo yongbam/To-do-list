@@ -31,25 +31,25 @@ and open the template in the editor.
 
             <div class="row">
                 <div class="col-md-3">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>This part will located on logon function</p>
                 </div>
                 <div class="col-md-6">
                     <div ng-app="myToDoListApp" ng-controller="myToDoCtrl">
                         <form onsubmit="addTodo(); return false;">
-                            <textarea ng-model="message" 
-                                      placeholder="What do you need to do?"
-                                      cols="40" rows="5"></textarea>
                             <button ng_click="save()">Save</button>
                             <button ng-click="clear()">ClearMessage</button>
-                            <button ng-click="clear_todo()">ClearAllToDo</button>
+                            <button ng-click="clearAll()">ClearAll</button>
                             <p>Number of characters left: <span ng-bind="left()"></span></p>
+                            <textarea ng-model="message" 
+                                      placeholder="What do you need to do?"
+                                      cols="70" rows="2"></textarea>
                         </form>
                         <ul id="todoItems">
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    <p>This part will located on Date and Profile</p>
                 </div>
             </div>
         </div>
