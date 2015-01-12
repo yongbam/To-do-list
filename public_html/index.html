@@ -16,6 +16,8 @@ and open the template in the editor.
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="http://code.angularjs.org/1.2.20/angular-route.js"></script>
+        <script src="http://code.angularjs.org/1.2.13/angular-cookies.js"></script>
         
         <script src="manage.js"></script>
         <script src="db.js"></script>
@@ -23,24 +25,35 @@ and open the template in the editor.
     </head>
     <body onload="init()">
         <div class="container">
+            <!-- Headline -->
             <div class="jumbotron">
                 <h1>My To do list</h1>
                 <p>This page will grow as we add more and more components from Bootstrap...</p>      
                 <a href="#" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-search"></span> Search</a>
             </div>
-
             <div class="row">
-                <div class="col-md-3">
-                    <p>This part will located on logon function</p>
+                <!-- Login -->
+                <div ng-app = "httpAuth" class="col-md-3">
+                    <div class="container">
+                        <div class="col-xs-offset-0 col-lg-2">
+                            <div ng-view></div>
+                        </div>
+                    </div>
+                    
+                    <script src="app.js"></script>
+                    <script src="loginController.js"></script>
+                    <script src="homeController.js"></script>
+                    <script src="service.js"></script>
                 </div>
-                <div class="col-md-6">
+                <!-- Todo list -->
+                <div class="col-md-6 span6">
                     <div ng-app="myToDoListApp" ng-controller="myToDoCtrl">
                         <form onsubmit="addTodo(); return false;">
                             <button ng_click="save()">Save</button>
                             <button ng-click="clear()">ClearMessage</button>
                             <button ng-click="clearAll()">ClearAll</button>
                             <p>Number of characters left: <span ng-bind="left()"></span></p>
-                            <textarea ng-model="message" 
+                            <textarea ng-model="message" class="span12"
                                       placeholder="What do you need to do?"
                                       cols="70" rows="2"></textarea>
                         </form>
